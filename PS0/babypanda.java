@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class babypanda {
-    public static void main (String[] args) {
+    /* public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);
         // note use long for large numbers
         long totalDays = sc.nextLong();
@@ -32,5 +32,23 @@ public class babypanda {
 
     public static long slimesAfterDays(int days) {
         return (long) Math.pow(2, days);
+    } */
+
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // note use long for large numbers
+        long totalDays = sc.nextLong();
+        long totalSlimes = sc.nextLong();
+        int ans = 0;
+
+        // the algorithm
+        while (totalSlimes > 0) {
+            totalSlimes /= 2;
+            if(totalSlimes%2 == 1) {
+                totalSlimes--;
+                ans++;
+            }
+        }
+        System.out.println(ans);
     }
 }

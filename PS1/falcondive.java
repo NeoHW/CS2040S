@@ -53,17 +53,16 @@ public class falcondive {
         int dc = f2c - f1c;
 
         count = 0;
-        for(int i=0; i < numLines; i++) {
-            for(int j=0; j < numChars; j++) {
-                if(str2.charAt(count) == c) {
-                    int row = count/numChars + dr;
-                    int col = count%numChars + dc;
-                    if((row >= 0 && row <= numLines-1) && (col >= 0 && col <= numChars -1)) {
-                        mtx[row][col] = c;
-                    }
+
+        while (count < numLines * numChars) {
+            if(str2.charAt(count) == c) {
+                int row = count/numChars + dr;
+                int col = count%numChars + dc;
+                if((row >= 0 && row <= numLines-1) && (col >= 0 && col <= numChars -1)) {
+                    mtx[row][col] = c;
                 }
-                count++;
             }
+            count++;
         }
 
         for(int i=0; i < numLines; i++) {

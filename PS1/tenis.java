@@ -37,7 +37,6 @@ public class tenis {
                         bWins++;
                     } else {
                         invalid = true;
-                        System.out.println("invalid at line 39");
                         break;
                     }
                 }
@@ -46,7 +45,6 @@ public class tenis {
             // check if theres a winner
             if(aWins < 2 && bWins < 2) {
                 invalid = true;
-                System.out.println("invalid at line 48");
             }
 
             
@@ -61,10 +59,9 @@ public class tenis {
     }
 
     public static int setWinner(int matchNum, String results, int aWins, int bWins) {
-        System.out.println("match " + matchNum);
+        // note that matches are 0,1,2
         
         if (aWins == 2 || bWins == 2) {
-            System.out.println("invalid at line 64");
             return -1;
         }
 
@@ -75,7 +72,6 @@ public class tenis {
 
         // checking for both less than 6 games
         if((s1 < 6 && s2 < 6)) {
-            System.out.println("invalid at line 76");
             return -1;
         }
 
@@ -83,20 +79,28 @@ public class tenis {
         if (matchNum != 2) {
             // should nvr go to 8 games
             if(s1 > 7 || s2 > 7) {
-                System.out.println("invalid at line 84");
                 return -1;
             }
 
             // 7:5/7:6 is valid; below 7:4 is not ; 7:7 not valid
             if((s1 == 7 || s2 == 7)) {
                 if(s1-s2 > 2 || s1-s2 < -2 || s1-s2 == 0) {
-                    System.out.println("invalid at line 91");
                     return -1;
                 }    
             }
         }
+
+
+        // 7:4 is not valid 3rd match
+        if(matchNum == 2 && ((s1 > 6 && s2 < 5) || (s2 > 6 && s1 < 5))) {
+            return -1;
+        }
         
-        // wins at least 2 games more than opp
+        // checking if there is a 2 point diff
+        if(s1-s2 < 2 && s1-s2 > -2) {
+            return -1;
+        }
+
         return (s1-s2 >= 2) ? 0 : 1;
     }
 }

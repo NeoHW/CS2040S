@@ -60,7 +60,7 @@ public class tenis {
 
     public static int setWinner(int matchNum, String results, int aWins, int bWins) {
         // note that matches are 0,1,2
-        
+
         if (aWins == 2 || bWins == 2) {
             return -1;
         }
@@ -82,11 +82,13 @@ public class tenis {
                 return -1;
             }
 
-            // 7:5/7:6 is valid; below 7:4 is not ; 7:7 not valid
+            // 7:5/7:6 is valid; below 7:4 is not ; 7:7 not valid (check all 7s combi)
             if((s1 == 7 || s2 == 7)) {
                 if(s1-s2 > 2 || s1-s2 < -2 || s1-s2 == 0) {
                     return -1;
-                }    
+                } else {
+                    return s1-s2 > 0 ? 0 : 1;
+                }
             }
         }
 

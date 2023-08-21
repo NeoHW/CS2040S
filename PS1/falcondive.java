@@ -19,18 +19,30 @@ public class falcondive {
         for(int i = 0; i < numLines; i++) {
             str2 = str2 + sc.nextLine();
         }
-        
-        char[] arr1 = str1.toCharArray();
-        char[] arr2 = str2.toCharArray();
+
+        int f1r = -1;
+        int f1c = -1;
+        int f2r = -1;
+        int f2c = -1;
 
         int count = 0;
         // creating the full background matrix
         for(int i = 0; i < numLines; i++) {
             for(int j = 0; j < numChars; j++) {
-                if(arr1[count] != c) {
-                    mtx[i][j] = arr1[count];
+                // getting first c in both frames
+                if(str1.charAt(count) == c && f1r == -1) {
+                    f1r = i;
+                    f1c = j;
+                }
+                if(str2.charAt(count) == c && f2r == -1) {
+                    f2r = i;
+                    f2c = j;
+                }
+
+                if(str1.charAt(count) != c) {
+                    mtx[i][j] = str1.charAt(count);
                 } else {
-                    mtx[i][j] = arr2[count];
+                    mtx[i][j] = str2.charAt(count);
                 }
                 count++;
             }
@@ -42,5 +54,11 @@ public class falcondive {
             }
             System.out.println();
         }
+
+        System.out.println("f1r "+ f1r);
+        System.out.println("f1c "+ f1c);
+        System.out.println("f2r "+ f2r);
+        System.out.println("f2c "+ f2c);
+
     }    
 }

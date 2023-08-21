@@ -48,17 +48,30 @@ public class falcondive {
             }
         }
 
-        for(int i = 0; i < numLines; i++) {
-            for(int j = 0; j < numChars; j++) {
+        // finding displacement of falcon
+        int dr = f2r - f1r;
+        int dc = f2c - f1c;
+
+        count = 0;
+        for(int i=0; i < numLines; i++) {
+            for(int j=0; j < numChars; j++) {
+                if(str2.charAt(count) == c) {
+                    int row = count/numChars + dr;
+                    int col = count%numChars + dc;
+                    if((row >= 0 && row <= numLines-1) && (col >= 0 && col <= numChars -1)) {
+                        mtx[row][col] = c;
+                    }
+                }
+                count++;
+            }
+        }
+
+        for(int i=0; i < numLines; i++) {
+            for(int j=0; j < numChars; j++) {
                 System.out.print(mtx[i][j]);
             }
             System.out.println();
         }
-
-        System.out.println("f1r "+ f1r);
-        System.out.println("f1c "+ f1c);
-        System.out.println("f2r "+ f2r);
-        System.out.println("f2c "+ f2c);
 
     }    
 }

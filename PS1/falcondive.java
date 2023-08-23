@@ -1,7 +1,12 @@
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
 
 public class falcondive {
     public static void main(String[] args) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Scanner sc = new Scanner(System.in);
         int numLines = sc.nextInt(), numChars = sc.nextInt();
         String input = sc.nextLine().trim();
@@ -24,6 +29,8 @@ public class falcondive {
         int f1c = -1;
         int f2r = -1;
         int f2c = -1;
+        int f2count = -1;
+        int f2countfinal = -1;
 
         int count = 0;
         // creating the full background matrix
@@ -34,9 +41,13 @@ public class falcondive {
                     f1r = i;
                     f1c = j;
                 }
-                if(str2.charAt(count) == c && f2r == -1) {
-                    f2r = i;
-                    f2c = j;
+                if(str2.charAt(count) == c) {
+                    if(f2r == -1) {
+                        f2r = i;
+                        f2c = j;
+                        f2count = count;
+                    }
+                    f2countfinal = count;
                 }
 
                 if(str1.charAt(count) != c) {
@@ -54,15 +65,15 @@ public class falcondive {
 
         count = 0;
 
-        while (count < numLines * numChars) {
-            if(str2.charAt(count) == c) {
-                int row = count/numChars + dr;
-                int col = count%numChars + dc;
+        while (f2count <= f2countfinal) {
+            if(str2.charAt(f2count) == c) {
+                int row = f2count/numChars + dr;
+                int col = f2count%numChars + dc;
                 if((row >= 0 && row <= numLines-1) && (col >= 0 && col <= numChars -1)) {
                     mtx[row][col] = c;
                 }
             }
-            count++;
+            f2count++;
         }
 
         for(int i=0; i < numLines; i++) {

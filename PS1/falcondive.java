@@ -5,24 +5,24 @@ import java.io.PrintWriter;
 
 
 public class falcondive {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Scanner sc = new Scanner(System.in);
-        int numLines = sc.nextInt(), numChars = sc.nextInt();
-        String input = sc.nextLine().trim();
-        char c = input.charAt(1);
+        String[] token = br.readLine().split(" ");
+        int numLines = Integer.parseInt(token[0]);
+        int numChars = Integer.parseInt(token[1]);
+        char c = token[2].charAt(1);
 
         char[][] mtx = new char[numLines][numChars];
         String str1 = "";
         String str2 = "";
 
         for(int i = 0; i < numLines; i++) {
-            str1 = str1 + sc.nextLine();
+            str1 = str1 + br.readLine();
         }
-        sc.nextLine();
+        br.readLine();
 
         for(int i = 0; i < numLines; i++) {
-            str2 = str2 + sc.nextLine();
+            str2 = str2 + br.readLine();
         }
 
         int f1r = -1;

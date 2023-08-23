@@ -26,20 +26,14 @@ public class heirsdilemma {
                 boolean flag = true;
                 int temp = L;
                 while(temp != 0) {
-                    //System.out.println("temp%10: " + temp%10);
                     if (L % (temp%10) != 0) {
-                        //System.out.println("L: " + L);
-                        //System.out.println("temp: " + temp);
                         flag = false;
                         break;
                     }
                     temp /= 10;
-                    //System.out.println(flag);
-                    //System.out.println("temp: " + temp);
                 }
                 if(flag == true) {
                     ans++;
-                    // System.out.println(L);
                 }
             }
         }
@@ -50,7 +44,9 @@ public class heirsdilemma {
         boolean[] used = new boolean[10];
 
         while (num != 0) {
+            // if duplicated digit found, return 
             if (used[num%10]) return false;
+            // update digit corresponding in arr
             used[num%10] = true;
             num /= 10;
         }

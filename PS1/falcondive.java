@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 public class falcondive {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter writer = new PrintWriter(System.out);
+
         String[] token = br.readLine().split(" ");
         int numLines = Integer.parseInt(token[0]);
         int numChars = Integer.parseInt(token[1]);
@@ -78,10 +80,13 @@ public class falcondive {
 
         for(int i=0; i < numLines; i++) {
             for(int j=0; j < numChars; j++) {
-                System.out.print(mtx[i][j]);
+                writer.print(mtx[i][j]);
             }
-            System.out.println();
+            writer.println();
         }
+
+        writer.flush(); // !!IMPT : to ensure output is printed
+        writer.close();
 
     }    
 }

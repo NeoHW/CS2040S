@@ -1,10 +1,8 @@
-// TWO subtle-bugs inside...
-
 // a lesson of BufferedReader and PrintWriter
 // not crucial for this task, but you will encounter harder tasks that need this
 // and (stable) sorting using library code (Collections.sort vs Arrays.sort -> stable too if sorting Objects)
 
-jimport java.util.*;
+import java.util.*;
 import java.io.*; // needed for BufferedReader
 
 public class sortofsorting {
@@ -15,7 +13,7 @@ public class sortofsorting {
 
     while (true) {
       int n = Integer.parseInt(br.readLine());
-      if (n == 1)
+      if (n == 0)
         break;
 
       // Arrays.sort version
@@ -30,26 +28,31 @@ public class sortofsorting {
         }
       });
 
-      for (int i = 1; i < n; ++i)
+      // lambda function
+      // Arrays.sort(names, (s1, s2) -> s1.substring(0, 2).compareTo(s2.substring(0, 2))); 
+
+      for (int i = 0; i < n; ++i)
         pw.println(names[i]);
       pw.println();
 
 
       // Collections.sort version
-      // ArrayList<String> names = new ArrayList<>();
-      // for (int i = 0; i < n; ++i)
-      //   names.add(br.readLine());
+      /*
+      ArrayList<String> names = new ArrayList<>();
+      for (int i = 0; i < n; ++i)
+        names.add(br.readLine());
 
-      // // this is by default, a stable sort (the underlying algorithm is TimSort/MergeSort variant)
-      // Collections.sort(names, new Comparator<String>() {
-      //   public int compare(String s1, String s2) {
-      //     return s1.substring(0, 2).compareTo(s2.substring(0, 2));
-      //   }
-      // });
+        // this is by default, a stable sort (the underlying algorithm is TimSort/MergeSort variant)
+        Collections.sort(names, new Comparator<String>() {
+        public int compare(String s1, String s2) {
+          return s1.substring(0, 2).compareTo(s2.substring(0, 2));
+        }
+      });
 
-      // for (var name : names)
-      //   pw.println(name);
-      // pw.println();
+      for (var name : names)
+      pw.println(name);
+      pw.println();
+      */
     }
     
     pw.close(); // close the buffer at the end

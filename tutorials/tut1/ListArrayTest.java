@@ -51,14 +51,20 @@ class ListArray<T> { // question 1a
     public void sortList() {
         // sort array A, question 1i
 
+        // Arrays.sort(A,0,N);
+
         // bubble sort early termination implementation
         for (int i = N-1; i > 0; i--) {
             boolean swapped = false;
             for (int j = 0; j < i; j++) {
-                if(A[j] > A[j+1]) {
-                    int temp = A[j];
-                    A[j] = A[j+1];
-                    A[j+1] = temp;
+                @SuppressWarnings("unchecked")
+                Comparable<T> item1 = (Comparable<T>) A[j];
+                T item2 = (T) A[j + 1];
+            
+                if (item1.compareTo(item2) > 0) {
+                    T temp = (T) A[j];
+                    A[j] = A[j + 1];
+                    A[j + 1] = temp;
                     swapped = true;
                 }
             }

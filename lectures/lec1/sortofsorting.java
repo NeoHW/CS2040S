@@ -21,7 +21,7 @@ public class sortofsorting {
       for (int i = 0; i < n; ++i)
         names[i] = br.readLine();
 
-      // this happens to be a stable sort as a String is not a primitive
+      // this happens to be a stable sort as a String is not a primitive (Arrays.sort on objects uses merge sort)
       Arrays.sort(names, new Comparator<String>() {
         public int compare(String s1, String s2) {
           return s1.substring(0, 2).compareTo(s2.substring(0, 2));

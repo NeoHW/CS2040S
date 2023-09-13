@@ -12,8 +12,7 @@ public class janeeyre {
         int JEnumPages = Integer.parseInt(token[2]);
 
         ArrayList<Book> toBeAdded = new ArrayList<>();
-        PriorityQueue<Book> pq = new PriorityQueue<>(1, (a, b) -> a.name.compareTo(b.name));
-        // PriorityQueue<Book> pq = new PriorityQueue<>(1, (a, b) -> a.name.replaceAll("\\s", "").compareTo(b.name.replaceAll("\\s", ""))); (if dont compare spaces)
+        PriorityQueue<Book> pq = new PriorityQueue<>(1, (a, b) -> a.name.compareTo(b.name)); // need to compare spaces
         pq.add(new Book("Jane Eyre", JEnumPages));
 
         for(int i = 0; i < unread; i++) {
@@ -34,18 +33,13 @@ public class janeeyre {
         // sort the toBeAdded books by earliest time
         Collections.sort(toBeAdded, (a, b) -> a.time - b.time);
 
-        //debuggin
-        for(Book b : toBeAdded) {
-            System.out.println("book in tobeadded: " + b.name);
-        }
-
-        int time = 0;
+        long time = 0;
         boolean done = false;
         while(!done) {
             // check time add books
             boolean booksAddedDone = false;
             while(!booksAddedDone) {
-                if(!toBeAdded.isEmpty() && toBeAdded.get(0).time > time) {
+                if(toBeAdded.isEmpty() || toBeAdded.get(0).time > time) {
                     booksAddedDone = true;
                 } else {
                     pq.add(toBeAdded.remove(0));
@@ -54,16 +48,15 @@ public class janeeyre {
 
             // get pq first book and add time
             Book b = pq.poll();
-            System.out.println("Book: " + b.name);
             time += b.pages;
 
             if(b.name.equals("Jane Eyre")) {
                 done = true;
             }
         }
+
         writer.println(time);
         writer.flush();
-
     }
 }
 

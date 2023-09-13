@@ -43,7 +43,7 @@ public class universityzoning {
 
         // T values for each faculty
         int[] tValues = new int[F];
-        for (int i = 0; i < F; i++) { // start from 1
+        for (int i = 0; i < F; i++) { 
             tValues[i] = sc.nextInt();
         }
 

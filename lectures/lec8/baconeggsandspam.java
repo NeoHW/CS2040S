@@ -11,29 +11,28 @@ public class baconeggsandspam {
                 return;
             }
 
-            TreeMap<String, PriorityQueue<String>> tm = new TreeMap<>();
+            TreeMap<String, ArrayList<String>> tm = new TreeMap<>();
 
             while(n-- >0) {
                 String[] arr = sc.nextLine().split(" ");
                 for(int i = 1; i < arr.length; i++) {
                     if(!tm.containsKey(arr[i])) {
-                        PriorityQueue<String> pq = new PriorityQueue<>();
-                        pq.add(arr[0]);
-                        tm.put(arr[i], pq);
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add(arr[0]);
+                        tm.put(arr[i], list);
                     } else {
-                        PriorityQueue<String> pq = tm.get(arr[i]);
-                        pq.add(arr[0]);
-                        tm.put(arr[i], pq);
+                        // we can do this as get returns a *reference* to it
+                        tm.get(arr[i]).add(arr[0]);
                     }
                 }
             }
 
             for (String key : tm.keySet()) {
                 System.out.print(key + " ");
-                PriorityQueue<String> pq = tm.get(key);
-                Iterator<String> it = pq.iterator();
-                while(it.hasNext()) {
-                    System.out.print(it.next() + " ");
+                ArrayList<String> al = tm.get(key);
+                al.sort((a,b) -> a.toLowerCase().compareTo(b.toLowerCase()));
+                for(String s : al) {
+                    System.out.print(s + " ");
                 }
                 System.out.println();    
             }

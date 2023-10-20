@@ -7,6 +7,8 @@ public class kannafriendship {
     public static long counter = 0;
     public static void main (String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(System.out);
+
         String[] tok = br.readLine().split(" ");
         long N = Long.parseLong(tok[0]);
         int Q = Integer.parseInt(tok[1]);
@@ -36,9 +38,12 @@ public class kannafriendship {
                     unionDisjoint(p);
                 }
             } else {
-                System.out.println(counter);
+                pw.println(counter);
             }
         }
+
+        pw.flush();
+        pw.close();
     }
 
     public static Pair unionDisjoint(Pair p) {
@@ -53,7 +58,7 @@ public class kannafriendship {
                 ts.remove(lower);
                 counter -= lower.length;
                 merged = true;
-                p = unionDisjoint(p); // why does calling this recursively changes things?
+                p = unionDisjoint(p); 
             }
 
             // case 2: p's range in lower's range
@@ -91,7 +96,7 @@ public class kannafriendship {
                 ts.remove(higher);
                 counter -= higher.length;
                 merged = true;
-                p = unionDisjoint(p); // why does calling this recursively changes things?
+                p = unionDisjoint(p); 
             }
             // case 3: p.second is in range of higher
             if (p.second >= higher.first && p.second <= higher.second && !merged) {

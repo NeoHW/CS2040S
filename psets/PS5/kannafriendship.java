@@ -41,61 +41,70 @@ public class kannafriendship {
         }
     }
 
-    public static void unionDisjoint(Pair p) {
+    public static Pair unionDisjoint(Pair p) {
+        boolean merged = false;
 
         // check lower element
         if(ts.lower(p) != null) {
             Pair lower = ts.lower(p);
 
             // case 1: lower's range in p's range
-            if (p.first <= lower.first && lower.second <= p.second) {
+            if (p.first <= lower.first && lower.second <= p.second && !merged) {
                 ts.remove(lower);
                 counter -= lower.length;
-                // unionDisjoint(p);
+                merged = true;
+                p = unionDisjoint(p); // why does calling this recursively changes things?
             }
 
             // case 2: p's range in lower's range
-            else if (p.first >= lower.first && p.second <= lower.second) {
+            if (p.first >= lower.first && p.second <= lower.second && !merged) {
                 ts.remove(p);
                 counter -= p.length;
+                merged = true;
             }
 
             // case 3: p.first is in range of lower
-            else if (p.first >= lower.first && p.first <= lower.second) {
+            if (p.first >= lower.first && p.first <= lower.second && !merged) {
                 Pair newPair = new Pair(lower.first, p.second);
                 ts.remove(p);
                 ts.remove(lower);
                 ts.add(newPair);
                 counter += newPair.length - p.length - lower.length;
-                unionDisjoint(newPair);
+                merged = true;
+                p = unionDisjoint(newPair);
             }
         }
 
         // check on higher element
         if(ts.higher(p) != null) {
+            merged = false;
             Pair higher = ts.higher(p);
             
             // case 1: p's range in higher's range
-            if (p.first >= higher.first && p.second <= higher.second) {
+            if (p.first >= higher.first && p.second <= higher.second && !merged) {
                 ts.remove(p);
                 counter -= p.length;
+                merged = true;
             }
             // case 2: higher's range in p's range
-            else if (higher.first >= p.first && higher.second <= p.second) {
+            if (higher.first >= p.first && higher.second <= p.second && !merged) {
                 ts.remove(higher);
                 counter -= higher.length;
-                // unionDisjoint(p);
+                merged = true;
+                p = unionDisjoint(p); // why does calling this recursively changes things?
             }
             // case 3: p.second is in range of higher
-            else if (p.second >= higher.first && p.second <= higher.second) {
+            if (p.second >= higher.first && p.second <= higher.second && !merged) {
                 Pair newPair = new Pair(p.first, higher.second);
                 ts.remove(p);
                 ts.remove(higher);
                 ts.add(newPair);
                 counter += newPair.length - p.length - higher.length;
-                unionDisjoint(newPair);
+                merged = true;
+                p = unionDisjoint(newPair);
             }
         }
+        return p;
     }
 
     static class Pair {

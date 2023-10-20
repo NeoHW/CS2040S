@@ -42,54 +42,22 @@ public class kannafriendship {
     }
 
     public static void unionDisjoint(Pair p) {
-        
-        // check on higher element
-        if(ts.higher(p) != null) {
-            Pair higher = ts.higher(p);
-            System.out.println("Comparing p " + p + " with higher " + higher);
-            
-            // case 1: p's range in higher's range
-            if (p.first == higher.first && p.second <= higher.second) {
-                ts.remove(p);
-                counter -= p.length;
-                System.out.println("Case 1: removing p: " + p);
-            }
-            // case 2: higher's range in p's range
-            else if (higher.first >= p.first && higher.second <= p.second) {
-                ts.remove(higher);
-                counter -= higher.length;
-                System.out.println("Case 2: removing higher: " + higher);
-            }
-            // case 3: p.second is in range of higher
-            else if (p.second >= higher.first && p.second <= higher.second) {
-                Pair newPair = new Pair(p.first, higher.second);
-                ts.remove(p);
-                ts.remove(higher);
-                ts.add(newPair);
-                counter += newPair.length - p.length - higher.length;
-                System.out.println("Case 3: removing p: " + p + " ,removing higher: " + higher + " , adding newPair: " + newPair);
-                // rebalance the avl (?)
-                // unionDisjoint(newPair); // recursive call here to balance the avl (?)
-            }
-        }
 
         // check lower element
         if(ts.lower(p) != null) {
             Pair lower = ts.lower(p);
-            System.out.println("Comparing p " + p + " with lower " + lower);
 
             // case 1: lower's range in p's range
-            if (p.first == lower.first && lower.second <= p.second) {
+            if (p.first <= lower.first && lower.second <= p.second) {
                 ts.remove(lower);
                 counter -= lower.length;
-                System.out.println("Case 1: removing lower: " + lower);
+                // unionDisjoint(p);
             }
 
             // case 2: p's range in lower's range
             else if (p.first >= lower.first && p.second <= lower.second) {
                 ts.remove(p);
                 counter -= p.length;
-                System.out.println("Case 2: removing p: " + p);
             }
 
             // case 3: p.first is in range of lower
@@ -99,9 +67,33 @@ public class kannafriendship {
                 ts.remove(lower);
                 ts.add(newPair);
                 counter += newPair.length - p.length - lower.length;
-                // rebalance the avl (?)
-                // unionDisjoint(newPair); // recursive call here to balance the avl (?)
-                System.out.println("Case 3: removing p: " + p + " ,removing lower: " + lower + " , adding newPair: " + newPair);
+                unionDisjoint(newPair);
+            }
+        }
+
+        // check on higher element
+        if(ts.higher(p) != null) {
+            Pair higher = ts.higher(p);
+            
+            // case 1: p's range in higher's range
+            if (p.first >= higher.first && p.second <= higher.second) {
+                ts.remove(p);
+                counter -= p.length;
+            }
+            // case 2: higher's range in p's range
+            else if (higher.first >= p.first && higher.second <= p.second) {
+                ts.remove(higher);
+                counter -= higher.length;
+                // unionDisjoint(p);
+            }
+            // case 3: p.second is in range of higher
+            else if (p.second >= higher.first && p.second <= higher.second) {
+                Pair newPair = new Pair(p.first, higher.second);
+                ts.remove(p);
+                ts.remove(higher);
+                ts.add(newPair);
+                counter += newPair.length - p.length - higher.length;
+                unionDisjoint(newPair);
             }
         }
     }

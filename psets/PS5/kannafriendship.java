@@ -26,6 +26,14 @@ public class kannafriendship {
             } else {
                 return 1;
             }
+            
+            // if using int
+            // int lower = a.first.compareTo(b.first);
+            // if (lower == 0) {
+            //     return a.second.compareTo(b.second);
+            // }
+            // return lower;
+
         });
 
         while (Q-- > 0) {

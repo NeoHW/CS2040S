@@ -38,25 +38,6 @@ public class teque {
                 }
             }
 
-            
-            System.out.println();
-            System.out.println(command +" "+num + " before rebalancing");
-            System.out.println("frontHalf");
-            System.out.println("frontHalfStart: " + frontHalfStart);
-            System.out.println("frontHalfEnd: " + frontHalfEnd);
-            for(int  key : frontHalf.keySet()) {
-                System.out.println(key + ": " + frontHalf.get(key));
-            }
-
-            System.out.println();
-
-            System.out.println("backHalf");
-            System.out.println("backHalfStart: " + backHalfStart);
-            System.out.println("backHalfEnd: " + backHalfEnd);
-            for(int  key : backHalf.keySet()) {
-                System.out.println(key + ": " + backHalf.get(key));
-            }
-
             // rebalancing the halfs so that add middle can be done using adding to back of frontHalf 
             
             if (frontHalf.size() - 1 > backHalf.size()) { // case 1 : fh max 1 more than bh
@@ -66,26 +47,6 @@ public class teque {
                 frontHalf.put(frontHalfEnd++, backHalf.get(backHalfStart + 1));
                 backHalf.remove(++backHalfStart);
             }
-
-            //debugging
-            System.out.println(command +" "+num + " after rebalancing");
-            System.out.println("frontHalf");
-            System.out.println("frontHalfStart: " + frontHalfStart);
-            System.out.println("frontHalfEnd: " + frontHalfEnd);
-            for(int  key : frontHalf.keySet()) {
-                System.out.println(key + ": " + frontHalf.get(key));
-            }
-
-            System.out.println();
-
-            System.out.println("backHalf");
-            System.out.println("backHalfStart: " + backHalfStart);
-            System.out.println("backHalfEnd: " + backHalfEnd);
-            for(int  key : backHalf.keySet()) {
-                System.out.println(key + ": " + backHalf.get(key));
-            }
-
-            System.out.println("==============");
         }
 
         pw.flush();

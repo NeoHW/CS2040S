@@ -1,3 +1,6 @@
+// aim 50/100
+// search algo?
+
 import java.util.*;
 import java.io.*;
 

@@ -1,4 +1,5 @@
-// full score this
+
+// turn on screen recording, this is a close internet PE
 
 import java.util.*;
 import java.io.*;
@@ -11,5 +12,19 @@ public class q1 {
 
         pw.flush();
         pw.close();
+    }
+    
+    static class Pair {
+        public int first;
+        public int second;
+
+        public Pair(int a, int b) {
+            this.first = a;
+            this.second = b;
+        }
+
+        public String toString() {
+            return "[" + first + "," + second + "]";
+        }
     }
 }

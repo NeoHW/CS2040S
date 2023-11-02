@@ -1,3 +1,5 @@
+// turn on screen recording, this is a close internet PE
+
 // aim 50/100
 // search algo?
 
@@ -12,5 +14,19 @@ public class q2 {
 
         pw.flush();
         pw.close();
+    }
+
+    static class Pair {
+        public int first;
+        public int second;
+
+        public Pair(int a, int b) {
+            this.first = a;
+            this.second = b;
+        }
+
+        public String toString() {
+            return "[" + first + "," + second + "]";
+        }
     }
 }

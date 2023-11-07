@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class fendofftitan {
-    private static final int INF = 1000000000;
+    private static final int INF = Integer.MAX_VALUE;
     public static void main (String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] tok = br.readLine().split(" ");
@@ -49,12 +49,18 @@ public class fendofftitan {
         PriorityQueue<Node> pq = new PriorityQueue<>();
 		pq.add(new Node(X,0,0,0));
 
-        while (!pq.isEmpty()) {                      // main loop
+        // main loop
+        while (!pq.isEmpty()) {
             Node top = pq.poll();
             int d = top.vertex;
             long distance = top.distance;
             int shamans = top.shaman;
             int titans = top.titan;
+
+            /*
+            System.out.println("===============");
+            System.out.println("best so far: " + top);
+            */
 
             if (top.compareTo(info.get(d)) > 0) {
                 continue;
@@ -67,8 +73,14 @@ public class fendofftitan {
                     info.set(neighbour.vertex, newNode); // relax operation
                     pq.add(newNode); // enqueue better pair
                 }
-
             }
+            /*
+            System.out.println("===");
+            System.out.println("PQ:" + Arrays.toString(pq.toArray()));
+            for(int i = 1; i < info.size(); i++) {
+                System.out.println(info.get(i));
+            }
+             */
         }
 
         if (info.get(Y).distance == INF) {
@@ -80,8 +92,7 @@ public class fendofftitan {
 
     }
 
-    // edge
-    static class Node implements Comparable<Node>{
+    static class Node implements Comparable<Node> {
         public int vertex;
         public long distance;
         public int shaman;
@@ -113,23 +124,4 @@ public class fendofftitan {
             return vertex + ": [" + distance + "," + shaman + "," + titan + "]";
         }
     }
-
-    // basically distance and other info
-    /*
-    static class Node{
-        public int distance;
-        public int shamanCount;
-        public int titanCount;
-
-        public Node(int d, int s, int t) {
-            this.distance = d;
-            this.shamanCount = s;
-            this.titanCount = t;
-        }
-
-        public String toString() {
-            return "[" + distance + "," + shamanCount + "," + titanCount + "]";
-        }
-    }
-     */
 }

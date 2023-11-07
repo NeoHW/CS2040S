@@ -52,12 +52,9 @@ public class fendofftitan {
         while (!pq.isEmpty()) {                      // main loop
             Node top = pq.poll();
             int d = top.vertex;
-            int distance = top.distance;
+            long distance = top.distance;
             int shamans = top.shaman;
             int titans = top.titan;
-
-            System.out.println("===============");
-            System.out.println("best so far: " + top);
 
             if (top.compareTo(info.get(d)) > 0) {
                 continue;
@@ -67,23 +64,11 @@ public class fendofftitan {
             for (Node neighbour : AL.get(d)) {
                 Node newNode = new Node(neighbour.vertex, distance + neighbour.distance, shamans + neighbour.shaman, titans + neighbour.titan);
                 if (newNode.compareTo(info.get(neighbour.vertex)) < 0) {;
-                    System.out.println("adding: " + neighbour + " to form " + newNode);
-
                     info.set(neighbour.vertex, newNode); // relax operation
                     pq.add(newNode); // enqueue better pair
                 }
 
             }
-
-            System.out.println("===");
-            System.out.println("PQ:" + Arrays.toString(pq.toArray()));
-            for(int i = 1; i < info.size(); i++) {
-            System.out.println(info.get(i));
-            }
-        }
-
-        for(int i = 1; i < info.size(); i++) {
-            System.out.println(i + " " + info.get(i));
         }
 
         if (info.get(Y).distance == INF) {
@@ -98,18 +83,15 @@ public class fendofftitan {
     // edge
     static class Node implements Comparable<Node>{
         public int vertex;
-        public int distance;
+        public long distance;
         public int shaman;
         public int titan;
 
-        public Node(int vertex, int d, int s, int t) {
+        public Node(int vertex, long d, int s, int t) {
             this.vertex = vertex;
             this.distance = d;
             this.shaman = s;
             this.titan = t;
-
-
-            System.out.println("Creating new Node: " + vertex + ": " + d + "," + s + "," + t);
         }
 
         public int compareTo(Node r) {
@@ -120,7 +102,7 @@ public class fendofftitan {
                 return this.shaman - r.shaman;
             }
             else if (this.distance != r.distance) {
-                return this.distance - r.distance;
+                return this.distance - r.distance > 0 ? 1 : -1;
             }
             else {
                 return this.vertex - r.vertex;

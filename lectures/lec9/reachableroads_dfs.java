@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class reachableroads {
+public class reachableroads_dfs {
 
     // declaring global variables
     public static ArrayList<ArrayList<Integer>> AL;

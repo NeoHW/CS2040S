@@ -29,8 +29,8 @@ public class treehouses {
         // adding p lines with exisiting cable (0 weight)
         for (int i = 0; i < p; i++) {
             tok = br.readLine().split(" ");
-            int u = Integer.parseInt(tok[0]);
-            int v = Integer.parseInt(tok[1]);
+            int u = Integer.parseInt(tok[0]) - 1;
+            int v = Integer.parseInt(tok[1]) - 1;
             EL.add(new IntegerTriple(0.0F,u,v));
             EL.add(new IntegerTriple(0.0F,v,u));
         }

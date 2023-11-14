@@ -1,19 +1,8 @@
-// Reachable Roads
-// Adjacency List (unweighted) demo, DFS and now BFS demo, counting CC demo
-// there are two subtle bugs here
-
 import java.util.*;
 
 class reachableroads_bfs {
   private static ArrayList<Boolean> visited;
   private static ArrayList<ArrayList<Integer>> AL;
-
-  // private static void dfs(int u) {
-  //   visited.set(u, true);
-  //   for (Integer v : AL.get(u)) // for each neighbor v of vertex u
-  //     if (!visited.get(v)) // if my neighbor v is not yet visited
-  //       dfs(v); // go there
-  // }
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
@@ -49,13 +38,14 @@ class reachableroads_bfs {
             for (Integer v : AL.get(u)) { // for each neighbor v of vertex u
               if (!visited.get(v)) { // if my neighbor v is not yet visited
                 Q.offer(v); // enqueue v into my Queue
-                visited.set(v, true); // mark v as visited (although it will only be visited later when it becomes front of queue)
+                visited.set(v, true); // mark v as visited (although it will only be visited later when it becomes
+                                      // front of queue)
               }
             }
           }
         }
 
-      System.out.println(CC-1);
+      System.out.println(CC - 1);
     }
   }
 }

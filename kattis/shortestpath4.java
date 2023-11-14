@@ -34,7 +34,6 @@ public class shortestpath4 {
             // doing queries
             int queries = Integer.parseInt(br.readLine()); // num queries
             while (queries-- > 0) {
-                pw.println(queries); //
                 
                 String[] tok = br.readLine().split(" ");
                 int s = Integer.parseInt(tok[0]);
@@ -49,22 +48,17 @@ public class shortestpath4 {
                 int count = 1;
 
                 while (!q.isEmpty()) {
-                    pw.println("count: " + count); //
-
                     if(count >= k) break;
                     int currSize = q.size();
                     HashMap<Integer,Integer> hm = new HashMap<>(); // to delay the changes
                     while (currSize-- >0) {
                         int v = q.poll();
-                        pw.println("v is: " + v);
-                        pw.println("dist list:" + dist);
 
                         for (Pair neighbour : AL.get(v)) {
                             if (dist.get(v) + neighbour.second >= dist.get(neighbour.first)) {
                                 continue;
                             }
-                            
-                            pw.println("at vertex " + v + "with distance"+ dist.get(v) + ", adding " + neighbour.first +  " with distance " + (dist.get(v) + neighbour.second)); //
+
                             q.add(neighbour.first);
                             if (!hm.containsKey(neighbour.first) || (hm.get(neighbour.first) > (dist.get(v) + neighbour.second))) {
                                 hm.put(neighbour.first, dist.get(v) + neighbour.second);

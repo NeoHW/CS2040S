@@ -15,31 +15,45 @@ public class buildinghighways {
             arr[i] = Integer.parseInt(tok[i-1]);
         }
 
-        ArrayList<IntegerTriple> EL = new ArrayList<>();
+        ArrayList<ArrayList<Pair>> AL = new ArrayList<>();
+        for (int i = 0 ; i < n+1; i++) {
+            AL.add(new ArrayList<>());
+        }
 
         for (int i = 1; i < arr.length; i++) {
             for (int j = 1; j < arr.length; j++) {
                 if (i == j) continue;
-                EL.add(new IntegerTriple(arr[i]+arr[j],i,j)); // weight, node i , node j
+                AL.get(i).add(new Pair(arr[i]+arr[j], j)); // weight, node
             }
         }
-        Collections.sort(EL);
 
+        boolean visited[] = new boolean[n+1];
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
 
+        visited[1] = true;
         int numTaken = 0;
-        int mst_cost = 0;
-        UnionFind uf = new UnionFind(n+1);
+        int totalWeight = 0;
 
-        for (int i = 0; i < EL.size(); i++) {
-            IntegerTriple front = EL.get(i);
-            if (uf.isSameSet(front.second(), front.third())) continue;
-            mst_cost += front.first();
-            uf.unionSet(front.second(), front.third());
-            numTaken++;
-            if (numTaken == n-1) break;  
+        for (Pair p : AL.get(1)) {
+            pq.add(p);
         }
 
-        pw.println(mst_cost);
+        while (!pq.isEmpty()) {
+            Pair p = pq.poll();
+            if (visited[p.second]) continue;
+            visited[p.second] = true;
+            totalWeight += p.first;
+            numTaken++;
+
+            // adding in their neighbours into pq
+            for (Pair neigh : AL.get(p.second)) {
+                pq.add(neigh);
+            }
+
+            if (numTaken == n-1) break;
+        }   
+
+        pw.println(totalWeight);
 
 
         pw.flush();

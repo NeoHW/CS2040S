@@ -8,54 +8,44 @@ public class buildinghighways {
 
         int n = Integer.parseInt(br.readLine());
         String[] tok = br.readLine().split(" ");
-        int[] arr = new int[n+1];
+        int[] arr = new int[n];
+
+        ArrayList<Pair> list = new ArrayList<>();
+        int min_idx = 0;
 
         // setting up array for nodes and their corresponding problematic level
-        for (int i = 1; i < n+1; i++) {
-            arr[i] = Integer.parseInt(tok[i-1]);
-        }
-
-        ArrayList<ArrayList<Pair>> AL = new ArrayList<>();
-        for (int i = 0 ; i < n+1; i++) {
-            AL.add(new ArrayList<>());
-        }
-
-        for (int i = 1; i < arr.length; i++) {
-            for (int j = 1; j < arr.length; j++) {
-                if (i == j) continue;
-                AL.get(i).add(new Pair(arr[i]+arr[j], j)); // weight, node
+        for (int i = 0; i < n; i++) {
+            // list.add(new Pair(Integer.parseInt(tok[i]), i)); // problematic level, node
+            arr[i] = Integer.parseInt(tok[i]);
+            if (arr[i] < arr[min_idx]) {
+                min_idx = i;
             }
         }
 
-        boolean visited[] = new boolean[n+1];
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        // Collections.sort(list);
+        int mst_cost = 0;
 
-        visited[1] = true;
-        int numTaken = 0;
-        int totalWeight = 0;
+        // Prims. Suppose you start Prims from the u = smallest a[] vertex
+        // Then every edge that you add from current CC to outside is just going to be an edge from u
+        // No other node in the CC can give a lower weighted edge
 
-        for (Pair p : AL.get(1)) {
-            pq.add(p);
+        int min = arr[min_idx];
+        for (int i = 0; i < n; i++) {
+            if (i == min_idx) continue;
+            mst_cost += (min + arr[i]);
         }
 
-        while (!pq.isEmpty()) {
-            Pair p = pq.poll();
-            if (visited[p.second]) continue;
-            visited[p.second] = true;
-            totalWeight += p.first;
-            numTaken++;
 
-            // adding in their neighbours into pq
-            for (Pair neigh : AL.get(p.second)) {
-                pq.add(neigh);
-            }
+        /*
+        int plvl1 = list.get(0).first;
 
-            if (numTaken == n-1) break;
-        }   
+        for (int i = 0; i < list.size(); i++) {
+            int plvl2 = list.get(i).first;
+            mst_cost += (plvl1 + plvl2);
+        }
+         */
 
-        pw.println(totalWeight);
-
-
+        pw.println(mst_cost);
         pw.flush();
         pw.close();
     }

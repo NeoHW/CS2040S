@@ -13,7 +13,7 @@ public class q1 {
 
 class Pair implements Comparable<Pair> {
     public int first;
-  public int second;
+    public int second;
 
     public Pair(int f, int s) {
         this.first = f;

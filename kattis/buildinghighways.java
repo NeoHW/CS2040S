@@ -10,7 +10,6 @@ public class buildinghighways {
         String[] tok = br.readLine().split(" ");
         int[] arr = new int[n];
 
-        ArrayList<Pair> list = new ArrayList<>();
         int min_idx = 0;
 
         // setting up array for nodes and their corresponding problematic level
@@ -23,7 +22,7 @@ public class buildinghighways {
         }
 
         // Collections.sort(list);
-        int mst_cost = 0;
+        long mst_cost = 0;
 
         // Prims. Suppose you start Prims from the u = smallest a[] vertex
         // Then every edge that you add from current CC to outside is just going to be an edge from u

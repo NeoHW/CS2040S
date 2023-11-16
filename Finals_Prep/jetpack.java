@@ -34,24 +34,14 @@ public class jetpack {
         // source vertex = [9][0]
         dfs(9,0);
 
-        System.out.println(end[0] + "," + end[1]);
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(parent[i][j]);
-            }
-            System.out.println();
-        }
-
         route = new ArrayList<>();
         route.add(new Pair(9,0)); // initial starting point
 
         backtrack(end[0], end[1]);
 
-        System.out.println(route);
-
         boolean hold = false;
         int holdingstart = 0;
+        int count = 0;
         for (int i = 0; i < route.size()-1; i++) {
             Pair curr = route.get(i);
             Pair next = route.get(i+1);
@@ -66,13 +56,14 @@ public class jetpack {
             }
 
             if (hold && curr.first + 1 == next.first) {
+                count++;
                 hold = false;
                 pw.print((curr.second-holdingstart) + " ");
                 pw.println();
                 continue;
             }
         }
-
+        System.out.println(count);
         pw.flush();
         pw.close();
     }

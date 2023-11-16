@@ -6,9 +6,6 @@ public class shortestpath4 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(System.out);
 
-        // dfs/bfs from the destination node up to max number of allowed vertices?
-        // greedy backtracking?
-
         int TC = Integer.parseInt(br.readLine());
 
         while (TC-- > 0) {
@@ -41,6 +38,12 @@ public class shortestpath4 {
                 int k = Integer.parseInt(tok[2]);
 
                 ArrayList<Integer> dist = new ArrayList<>(Collections.nCopies(n, Integer.MAX_VALUE));
+
+                // dijsktra, basically same as fend off titans, except now we store each possible length variation in an arraylist
+                
+
+                
+                /* 
                 //bfs with distance array
                 Queue<Integer> q = new LinkedList<>();
                 q.add(s);
@@ -73,6 +76,7 @@ public class shortestpath4 {
                 }
                 pw.println(dist.get(t) == Integer.MAX_VALUE ? -1 : dist.get(t));
             }
+            */
             pw.println();
         }
 

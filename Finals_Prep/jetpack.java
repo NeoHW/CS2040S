@@ -18,7 +18,6 @@ public class jetpack {
 
         grid = new char[m][n];
         visited = new boolean[m][n];
-        visited[9][0] = true;
         
         for (int i = 0 ; i < m; i++) {
             grid[i] = br.readLine().toCharArray();
@@ -45,8 +44,17 @@ public class jetpack {
         boolean hold = false;
         int holdingstart = 0;
         int count = 0;
-        for (int i = 0; i < route.size()-1; i++) {
+        for (int i = 0; i < route.size(); i++) {
             Pair curr = route.get(i);
+            if (curr.second == n-1) {
+                if(hold) {
+                    count++;
+                    pw.print((curr.second-holdingstart) + " ");
+                    pw.println();
+                }
+                break;
+            }
+
             Pair next = route.get(i+1);
 
             if((curr.first == 0 && next.first == 0) || (curr.first - 1 == next.first)) {
@@ -58,7 +66,7 @@ public class jetpack {
                 }
             }
 
-            if (hold && curr.first + 1 == next.first) {
+            if (hold && (curr.first + 1 == next.first)) {
                 count++;
                 hold = false;
                 pw.print((curr.second-holdingstart) + " ");

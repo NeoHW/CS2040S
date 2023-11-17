@@ -6,6 +6,7 @@ public class jetpack {
     static int n;
     static int[] end;
     static char[][] grid;
+    static boolean[][] visited;
     static Pair[][] parent;
     static ArrayList<Pair> route;
     public static void main(String[] args) throws Exception {
@@ -16,6 +17,8 @@ public class jetpack {
         n = Integer.parseInt(br.readLine());
 
         grid = new char[m][n];
+        visited = new boolean[m][n];
+        visited[9][0] = true;
         
         for (int i = 0 ; i < m; i++) {
             grid[i] = br.readLine().toCharArray();
@@ -69,6 +72,8 @@ public class jetpack {
     }
 
     public static void dfs(int r, int c) {
+        visited[r][c] = true;
+
         // base case: last column
         if (c == n-1 && grid[r][c] == '.') {
             end = new int[]{r,c};
@@ -91,7 +96,7 @@ public class jetpack {
         for (int[] d : directions) {
             int row = r + d[0];
             int col = c + d[1];
-            if (grid[row][col] == '.') {
+            if (grid[row][col] == '.' && !visited[row][col]) {
                 parent[row][col] = new Pair(r,c);
                 dfs(row,col);
             }

@@ -82,10 +82,6 @@ public class onepunch {
             }
         }
 
-        for(String key : joinablePaths.keySet()) {
-            System.out.println(key + ": " + joinablePaths.get(key));
-        }
-
 
         while (q-- > 0) {
             tok = br.readLine().split(" ");
@@ -94,9 +90,6 @@ public class onepunch {
             int c = Integer.parseInt(tok[2]) - 1;
             int d = Integer.parseInt(tok[3]) - 1;
             int k = Integer.parseInt(tok[4]);
-
-            System.out.println(boxNum(a, b));
-            System.out.println(boxNum(c,d));
 
             int start = uf.findSet(boxNum(a, b));
             int end = uf.findSet(boxNum(c, d));
@@ -169,43 +162,6 @@ class Pair implements Comparable<Pair> {
 
     public String toString() {
         return "[" + first() + "," + second() + "]";
-    }
-}
-
-class IntegerTriple implements Comparable<IntegerTriple> {
-    public int first;
-    public int second;
-    public int third;
-
-    public IntegerTriple(int f, int s, int t) {
-        this.first = f;
-        this.second = s;
-        this.third = t;
-    }
-
-    public int compareTo(IntegerTriple o) {
-        if (!this.first().equals(o.first()))
-            return this.first() - o.first();
-        else if (!this.second().equals(o.second()))
-            return this.second() - o.second();
-        else
-            return this.third() - o.third();
-    }
-
-    Integer first() {
-        return first;
-    }
-
-    Integer second() {
-        return second;
-    }
-
-    Integer third() {
-        return third;
-    }
-
-    public String toString() {
-        return "[" + first() + "," + second() + "," + third() + "]";
     }
 }
 

@@ -10,21 +10,21 @@ public class conquest {
         int n = Integer.parseInt(tok[0]);
         int e = Integer.parseInt(tok[1]);
         
-        ArrayList<ArrayList<Integer>> EL = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> AL = new ArrayList<>();
         boolean[] visited = new boolean[n+1];
         
         // creating 1-based index EL
         for (int i = 0; i <= n; i++) {
-            EL.add(new ArrayList<>());
+            AL.add(new ArrayList<>());
         }
 
-        // setting up the edges, storing the neighbours of each island
+        // setting up the AL, storing the neighbours of each island
         for (int i = 0 ; i < e; i++) {
             tok = br.readLine().split(" ");
             int u = Integer.parseInt(tok[0]);
             int v = Integer.parseInt(tok[1]);
-            EL.get(u).add(v);
-            EL.get(v).add(u);
+            AL.get(u).add(v);
+            AL.get(v).add(u);
         }
 
         // hashmap of island num -> army strength
@@ -40,7 +40,7 @@ public class conquest {
         PriorityQueue<Pair> pq = new PriorityQueue<>(); // distance, vertex (to compare by dist)
         
         // adding source vertex neighbours into pq
-        for (int neighbour : EL.get(1)) {
+        for (int neighbour : AL.get(1)) {
             pq.add(new Pair(armySize.get(neighbour), neighbour));
         }
 
@@ -54,7 +54,7 @@ public class conquest {
             visited[p.second] = true;
             currStrength += p.first;
 
-            for (int neighbour : EL.get(p.second)) {
+            for (int neighbour : AL.get(p.second)) {
                 pq.add(new Pair(armySize.get(neighbour), neighbour));
             }
         }

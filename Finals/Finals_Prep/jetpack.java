@@ -57,7 +57,7 @@ public class jetpack {
 
             Pair next = route.get(i+1);
 
-            if((curr.first == 0 && next.first == 0) || (curr.first - 1 == next.first)) {
+            if ((curr.first == 0 && next.first == 0) || (curr.first - 1 == next.first)) {
                 if (!hold) {
                     hold = true;
                     holdingstart = curr.second;
